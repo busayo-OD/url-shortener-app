@@ -1,5 +1,5 @@
 const express = require('express');
-const {connectToMongoDB} = require('./src/database/db');
+const connectDB = require('./src/database/db');
 const authRouter = require('./src/routes/auth.routes');
 const urlRouter = require('./src/routes/url.routes');
 const indexRouter = require('./src/routes/index.routes');
@@ -17,7 +17,7 @@ const app = express()
 const PORT = process.env.PORT
 
 // Connect to MongoDB
-connectToMongoDB();
+connectDB();
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
