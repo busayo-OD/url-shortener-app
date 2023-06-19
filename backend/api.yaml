@@ -12,6 +12,8 @@ info:
 servers:
   - url: http://localhost:5000
     description: Local Server
+  - url: https://snappy-ftfz.onrender.com
+    description: Host Server
 
 security:
   - bearerAuth: []
