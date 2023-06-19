@@ -1,0 +1,344 @@
+openapi: 3.0.0
+info:
+  title: Url Shortener App
+  description: Url Shortener App Backend
+  version: 1.0.0-oas3
+  contact:
+    email: toyinoluwabusayo@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/liscences/LIS
+
+servers:
+  - url: http://localhost:5000
+    description: Local Server
+
+security:
+  - bearerAuth: []
+
+tags:
+  - name: "authentication"
+    description: "Authentication Routes"
+  - name: "urls"
+    description: "Url Routes"
+  - name: "qrcode"
+    description: "QrCode Routes"
+
+paths:
+#Register
+  /auth/register:
+    post:
+      tags:
+        - authentication
+      summary: 
+        - sign up 
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterDTO'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+
+#Login
+  /auth/login:
+    post:
+      tags:
+        - authentication
+      summary: 
+        - sign in 
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginDTO'
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+
+#Shorten Url
+  /urls/shorten:
+    post:
+      tags:
+        - urls
+      summary: 
+        - create short url
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShortenUrlDTO'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Url' 
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+
+#Edit Shortened Url
+  /urls/edit/{id}:
+    patch:
+      tags:
+        - urls
+      summary: 
+        - edit short url 
+      parameters:
+        - name: 'id'
+          in: 'path'
+          description: 'id'
+          required: true
+          type: 'string'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditShortenUrlDTO' 
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Url' 
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+
+#Get My Urls
+  /urls:
+    get:
+      tags:
+        - urls
+      summary: 
+        - get user short urls
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Url' 
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+
+#Get Url by Id
+  /urls/{id}:
+    get:
+      tags:
+        - urls
+      summary: 
+        - get short url by id
+      parameters:
+        - name: 'id'
+          in: 'path'
+          description: 'id'
+          required: true
+          type: 'string'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Url' 
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    UserSchema:
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+        urls:
+          type: array
+          items:
+            type: string
+            format: uuid
+      required:
+        - first_name
+        - last_name
+        - email
+        - password
+      
+    RegisterDTO:
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+      required:
+        - first_name
+        - last_name
+        - email
+        - password 
+
+    LoginDTO:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+      required:
+        - email
+        - password 
+    
+    UrlSchema:
+      type: object
+      properties:
+        backHalf:
+          type: string
+        longUrl:
+          type: string
+          required: true
+        shortUrl:
+          type: string
+        owner:
+          type: string
+          format: objectId
+          description: Reference to User schema
+        title:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        clickSources:
+          type: array
+          items:
+            type: string
+        qrCode:
+          type: string
+        clicks:
+          type: number
+          default: 0
+        date:
+          type: string
+          format: date-time
+          default: '1970-01-01T00:00:00Z'
+
+    Url:
+      type: object
+      properties:
+        backHalf:
+          type: string
+        longUrl:
+          type: string
+        shortUrl:
+          type: string
+        owner:
+          type: string
+        title:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        clickSources:
+          type: array
+          items:
+            type: string
+        clicks:
+          type: integer
+        date:
+          type: string
+        _id:
+          type: string
+        __v:
+          type: integer 
+
+    ShortenUrlDTO:
+      type: object
+      properties:
+        longUrl:
+          type: string
+        title:
+          type: string
+        backHalf:
+          type: string
+      required:
+        - longUrl
+
+    EditShortenUrlDTO:
+      type: object
+      properties:
+        title:
+          type: string
+        backHalf:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string

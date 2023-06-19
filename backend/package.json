@@ -1,0 +1,29 @@
+{
+  "name": "scissor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "scissor.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.1.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.2.2",
+    "qrcode": "^1.5.3",
+    "shortid": "^2.2.16",
+    "swagger-ui-express": "^4.6.3",
+    "valid-url": "^1.0.9",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
