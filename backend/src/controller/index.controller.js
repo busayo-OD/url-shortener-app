@@ -3,7 +3,7 @@ const Url = require('../model/url.model');
 // redirect to long/original url
 const getLongUrl = async (req, res) => {
     try {
-        const url = await Url.findOne({urlCode: req.params.customSlug})
+        const url = await Url.findOne({backHalf: req.params.customSlug})
 
         if(url) {
             url.clicks++
