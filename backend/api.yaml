@@ -10,11 +10,11 @@ info:
     url: http://www.apache.org/liscences/LIS
 
 servers:
+  - url: https://snippy.onrender.com
+    description: Host Server
   - url: http://localhost:5000
     description: Local Server
-  - url: https://snappy-ftfz.onrender.com
-    description: Host Server
-
+  
 security:
   - bearerAuth: []
 
@@ -198,7 +198,7 @@ paths:
           description: Not Found
 
 #Generate qrcode
-  /qr/create:
+  /qr/create/{id}:
     post:
       tags:
         - qrcode
