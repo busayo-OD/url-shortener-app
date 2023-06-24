@@ -375,9 +375,3 @@ components:
           type: array
           items:
             type: string
-
-    GenerateQrCodeDto:
-      type: object
-      properties:
-        shortUrl:
-          type: string

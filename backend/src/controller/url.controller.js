@@ -99,16 +99,21 @@ const editShortUrl = async (req, res, next) => {
   };
   
 
-const myUrls = async (req, res, next) => {
-    
-    try{
-        const user = await User.findOne(req.user._id).populate('urls').exec()
-        return res.status(200).json(user.urls)
-        
-    } catch(err) {
+  const myUrls = async (req, res, next) => {
+    try {
+        const user = await User.findOne(req.user._id)
+            .populate({
+                path: 'urls',
+                options: { sort: { date: -1 } } 
+            })
+            .exec();
+
+        return res.status(200).json(user.urls);
+    } catch (err) {
         next(err);
     }
 }
+
 
 const getShortUrlById = async (req, res, next) => {
   const { id } = req.params;
