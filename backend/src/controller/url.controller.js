@@ -89,6 +89,7 @@ const editShortUrl = async (req, res, next) => {
 
     await url.save();
     url.shortUrl = `${baseUrl}/${url.backHalf}`;
+    await url.save();
     return res.status(200).json(url);
 
   } catch (err) {
