@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+// Mixin
+@mixin flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+// Reset
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  scrollbar-width: thin; //Firefox
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  background: #fff;
+  color: #333;
+  font-size: 1.4rem;
+  line-height: 2.4rem;
+  overflow-x: hidden;
+  font-family: 'Inter', sans-serif;
+  margin: 0 !important;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none !important;
+  color: #333;
+}
+
+// Navbar
+.navbar {
+  @include flex-row;
+  justify-content: space-between;
+  height: 6rem;
+  box-shadow: 0 0.3rem 0.5rem #f5f3f3;
+  padding: 2rem;
+
+  .nav-links {
+    @include flex-row;
+    column-gap: 2rem;
+
+    a {
+      color: #333;
+
+      &.active {
+        color: rgb(29, 220, 234);
+      }
+    }
+
+    div {
+      cursor: pointer;
+    }
+  }
+}
+
+.page-content {
+  padding: 2rem;
+}
+
+.home {
+  display: grid;
+  grid-template-columns: 0.3fr 0.7fr;
+  column-gap: 3rem;
+}
+
+.links {
+  @include flex-column;
+  row-gap: 2rem;
+}
+
+.form {
+  @include flex-column;
+  row-gap: 1rem;
+  margin-top: 2rem;
+
+  > div {
+    @include flex-column;
+  }
+}
