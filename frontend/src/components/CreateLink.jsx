@@ -5,7 +5,7 @@ import { MyContext } from '../MyContext';
 const CreateLink = () => {
   const navigate = useNavigate();
 
-  const { token, links, setLinks } = useContext(MyContext);
+  const { token, links, setLinks, setCurrUrl } = useContext(MyContext);
 
   const [formFields, setFormFields] = useState({
     longUrl: '',
@@ -37,45 +37,56 @@ const CreateLink = () => {
 
     const data = await res.json();
     setLinks([data, ...links]);
+    setCurrUrl(data);
     navigate('/');
   }
 
   const onSubmit = (e) => {
     e.preventDefault();
-    createUrl();
+
+    if (
+      formFields.backHalf !== '' &&
+      formFields.longUrl !== '' &&
+      formFields.title !== ''
+    ) {
+      createUrl();
+    }
   };
 
   return (
-    <form onSubmit={onSubmit} className='form'>
-      <div>
-        <label>Destination</label>
-        <input
-          type='text'
-          name='longUrl'
-          value={formFields.longUrl}
-          onChange={onChange}
-        />
-      </div>
-      <div>
-        <label>Title</label>
-        <input
-          type='text'
-          name='title'
-          value={formFields.title}
-          onChange={onChange}
-        />
-      </div>
-      <div>
-        <label>Back half</label>
-        <input
-          type='text'
-          name='backHalf'
-          value={formFields.backHalf}
-          onChange={onChange}
-        />
-      </div>
-      <button>Create</button>
-    </form>
+    <div className='center'>
+      <h2>Create Link</h2>
+      <form onSubmit={onSubmit} className='form'>
+        <div>
+          <label>Destination</label>
+          <input
+            type='text'
+            name='longUrl'
+            value={formFields.longUrl}
+            onChange={onChange}
+          />
+        </div>
+        <div>
+          <label>Title</label>
+          <input
+            type='text'
+            name='title'
+            value={formFields.title}
+            onChange={onChange}
+          />
+        </div>
+        <div>
+          <label>Back half</label>
+          <input
+            type='text'
+            name='backHalf'
+            value={formFields.backHalf}
+            onChange={onChange}
+          />
+        </div>
+        <button>Create</button>
+      </form>
+    </div>
   );
 };
 

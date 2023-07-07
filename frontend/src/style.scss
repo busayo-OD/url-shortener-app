@@ -25,7 +25,7 @@ html {
 }
 
 body {
-  background: #fff;
+  background: #f4f6fa;
   color: #333;
   font-size: 1.4rem;
   line-height: 2.4rem;
@@ -50,6 +50,7 @@ a {
   height: 6rem;
   box-shadow: 0 0.3rem 0.5rem #f5f3f3;
   padding: 2rem;
+  background: #fff;
 
   .nav-links {
     @include flex-row;
@@ -71,8 +72,24 @@ a {
 
 .page-content {
   padding: 2rem;
-}
 
+  .center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+    }
+  }
+}
+.card {
+  border: 1px solid #f8f2f2;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 4px;
+}
 .home {
   display: grid;
   grid-template-columns: 0.3fr 0.7fr;
@@ -82,14 +99,99 @@ a {
 .links {
   @include flex-column;
   row-gap: 2rem;
+
+  > div {
+    .date {
+      font-weight: 300;
+      color: #526281;
+      font-size: 14px;
+    }
+
+    .long-url {
+      // color: #273144;
+    }
+
+    .short-url {
+      color: #ff6116;
+      font-size: 14px;
+      display: inline-block;
+      margin-top: 1rem;
+    }
+  }
+}
+
+.link {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+
+  .card {
+    @include flex-column();
+    row-gap: 2rem;
+
+    a {
+      &:first-child {
+        font-size: 2.2rem;
+        line-height: 3.2rem;
+        font-weight: 400;
+      }
+
+      &.colored {
+        color: #2a5bd7;
+      }
+    }
+  }
 }
 
 .form {
   @include flex-column;
   row-gap: 1rem;
   margin-top: 2rem;
+  width: 50%;
+
+  @media (max-width: 728px) {
+    width: 70%;
+
+    @media (max-width: 500px) {
+      width: 85%;
+    }
+  }
+
+  input {
+    border: 1px solid #dbe0eb;
+    border-radius: 6px;
+    padding: 8px;
+    margin-top: 0.5rem;
+
+    &:focus {
+      border-color:#2a5bd7 ;
+      outline: none;
+    }
+  }
+
+  button {
+    background: #2a5bd7;
+    border-radius: 4px;
+    border: none;
+    padding: 6px;
+    color: #fff;
+    margin-top: 0.5rem;
+  }
 
   > div {
     @include flex-column;
   }
+}
+
+.qr-code {
+  img {
+    width: 40%;
+  }
+}
+
+.edit-btn {
+  background: #dbe0eb;
+  padding: 0.7rem 2rem;
+  width: fit-content;
+  border-radius: 0.4rem;
 }

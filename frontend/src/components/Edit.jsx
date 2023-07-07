@@ -70,12 +70,14 @@ const Edit = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    editUrl();
+    if (formFields.backHalf !== '' && formFields.title !== '') {
+      editUrl();
+    }
   };
 
   return (
-    <div>
-      <div>Edit Link</div>
+    <div className='center'>
+      <h2>Edit Link</h2>
       <form className='form' onSubmit={onSubmit}>
         <div>
           <label>Title</label>

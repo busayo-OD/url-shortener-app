@@ -22,36 +22,43 @@ const Register = () => {
   };
 
   async function onSubmit(e) {
-    e.preventDefault();
+    if (
+      formFields.email !== '' &&
+      formFields.password !== '' &&
+      formFields.first_name !== '' &&
+      formFields.last_name !== ''
+    ) {
+      e.preventDefault();
 
-    // Reset
-    setToken(null);
-    setAlert('');
+      // Reset
+      setToken(null);
+      setAlert('');
 
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formFields),
-    };
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formFields),
+      };
 
-    const res = await fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/auth/register`,
-      options
-    );
+      const res = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/auth/register`,
+        options
+      );
 
-    const data = await res.json();
-    if (data.token) {
-      setToken(data.token);
-      sessionStorage.setItem('token', data.token);
-      navigate('/');
-    } else {
-      setAlert(data.error);
-      setTimeout(() => {
-        setAlert('');
-      }, 3000);
-      sessionStorage.removeItem('token');
+      const data = await res.json();
+      if (data.token) {
+        setToken(data.token);
+        sessionStorage.setItem('token', data.token);
+        navigate('/');
+      } else {
+        setAlert(data.error);
+        setTimeout(() => {
+          setAlert('');
+        }, 3000);
+        sessionStorage.removeItem('token');
+      }
     }
   }
 
@@ -60,9 +67,9 @@ const Register = () => {
   }
 
   return (
-    <div>
-      <h2>Sign up</h2>
+    <div className='center'>
       <form onSubmit={onSubmit} className='form'>
+        <h2>Sign up</h2>
         <div>
           <label>Firstname</label>
           <input

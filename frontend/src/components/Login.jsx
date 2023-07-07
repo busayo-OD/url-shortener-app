@@ -20,36 +20,38 @@ const Login = () => {
   };
 
   async function onSubmit(e) {
-    e.preventDefault();
+    if (formFields.email !== '' && formFields.password !== '') {
+      e.preventDefault();
 
-    // Reset
-    setToken(null);
-    setAlert('');
+      // Reset
+      setToken(null);
+      setAlert('');
 
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formFields),
-    };
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formFields),
+      };
 
-    const res = await fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/auth/login`,
-      options
-    );
+      const res = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/auth/login`,
+        options
+      );
 
-    const data = await res.json();
-    if (data.token) {
-      setToken(data.token);
-      sessionStorage.setItem('token', data.token);
-      navigate('/');
-    } else {
-      setAlert(data.error);
-      setTimeout(() => {
-        setAlert('');
-      }, 3000);
-      sessionStorage.removeItem('token');
+      const data = await res.json();
+      if (data.token) {
+        setToken(data.token);
+        sessionStorage.setItem('token', data.token);
+        navigate('/');
+      } else {
+        setAlert(data.error);
+        setTimeout(() => {
+          setAlert('');
+        }, 3000);
+        sessionStorage.removeItem('token');
+      }
     }
   }
 
@@ -58,7 +60,7 @@ const Login = () => {
   }
 
   return (
-    <div>
+    <div className='center'>
       <h2>Log in</h2>
       <form onSubmit={onSubmit} className='form'>
         <div>

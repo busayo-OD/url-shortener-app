@@ -12,11 +12,15 @@ const Links = ({ links }) => {
   return (
     <div className='links'>
       {links.length ? (
-        links.map((link) => (
-          <div key={link._id} onClick={() => onClick(link._id)}>
-            <div>{link.date}</div>
-            <div>{link.backHalf}</div>
-            <div>{link.longUrl}</div>
+        links.map((link, index) => (
+          <div key={index} className='card' onClick={() => onClick(link._id)}>
+            <div className='date'>{link.date.slice(0,15)}</div>
+            <a href={link.longUrl} className='long-url' target='_blank' rel='noreferrer'>
+              {link.longUrl}
+            </a>
+            <a href={link.shortUrl} className='short-url' target='_blank' rel='noreferrer'>
+              {link.shortUrl}
+            </a>
           </div>
         ))
       ) : (

@@ -1,15 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { MyContext } from '../MyContext';
 
 const QrCode = () => {
   let { id } = useParams();
   const { token, currUrl, setCurrUrl, qrCode, setQrCode } =
     useContext(MyContext);
-
-  const [bodyData, setBodyData] = useState({
-    shortUrl: currUrl && currUrl.shortUrl,
-  });
 
   useEffect(() => {
     if (!currUrl) {
@@ -25,6 +21,10 @@ const QrCode = () => {
   }, []);
 
   async function generateQR() {
+    const bodyData = {
+      shortUrl: currUrl && currUrl.shortUrl,
+    };
+
     const options = {
       method: 'POST',
       headers: {
@@ -63,8 +63,8 @@ const QrCode = () => {
   }
 
   return (
-    <div>
-      <div>QR Code</div>
+    <div className='qr-code center'>
+      <h2>QR Code</h2>
       {qrCode && <img src={qrCode} alt='QR' />}
     </div>
   );
