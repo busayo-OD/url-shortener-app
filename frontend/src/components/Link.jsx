@@ -1,30 +1,75 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link as PageLink } from 'react-router-dom';
 
 const Link = ({ currUrl }) => {
+  const [buttonText, setButtonText] = useState('Copy');
+
+  const onClick = () => {
+    navigator.clipboard.writeText(currUrl.shortUrl);
+    setButtonText('Copied!');
+  };
+
   return (
     <div className='link'>
       {currUrl && (
         <div className='card'>
-          <a href={currUrl.shortUrl} target='_blank' rel='noreferrer'>
-            {currUrl.shortUrl}
-          </a>
+          {currUrl.title ? (
+            <div>{currUrl.title}</div>
+          ) : (
+            <a href={currUrl.shortUrl} target='_blank' rel='noreferrer'>
+              {currUrl.shortUrl}
+            </a>
+          )}
           <div>{currUrl.date.slice(0, 28)}</div>
-          <PageLink to={`/${currUrl._id}/edit`} className='edit-btn'>Edit</PageLink>
+          <PageLink to={`/${currUrl._id}/edit`} className='edit-btn'>
+            Edit
+          </PageLink>
         </div>
       )}
 
       {currUrl && (
         <div className='card'>
-          <a href={currUrl.shortUrl} className='colored' target='_blank' rel='noreferrer'>
-            {currUrl.shortUrl}
-          </a>
-          <div>{currUrl.title}</div>
-          {currUrl.qrCode && <img src={currUrl.qrCode} alt='QR Code' />}
+          <div className='link-copy'>
+            <a
+              href={currUrl.shortUrl}
+              className='colored'
+              target='_blank'
+              rel='noreferrer'
+            >
+              {currUrl.shortUrl}
+            </a>
+
+            <button onClick={onClick} className='copy'>
+              {buttonText}
+            </button>
+          </div>
+          <div className='redirect'>
+            <span>Redirect to - </span>{' '}
+            <a href={currUrl.longUrl} target='_blank' rel='noreferrer'>
+              {currUrl.longUrl}
+            </a>
+          </div>
+          {currUrl.qrCode && (
+            <div className='link-qr'>
+              <h2>QR Code</h2>
+              <img src={currUrl.qrCode} alt='QR Code' />
+            </div>
+          )}
           {!currUrl.qrCode && (
             <PageLink to={`/${currUrl._id}/create-qrcode`}>
               Generate QR Code
             </PageLink>
+          )}
+
+          {currUrl && (
+            <div className='stats'>
+              <h2>Statistics</h2>
+
+              <div className='readings'>
+                <span className='label'>Clicks : </span>
+                <span className='value'>{currUrl.clicks}</span>
+              </div>
+            </div>
           )}
         </div>
       )}
