@@ -35,8 +35,12 @@ function App() {
       }}
     >
       <Navbar />
-      {alert && <div>{alert}</div>}
       <div className='page-content'>
+        {alert && (
+          <div className='alert'>
+            <div>{alert}</div>
+          </div>
+        )}
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/register' element={<Register />} />
