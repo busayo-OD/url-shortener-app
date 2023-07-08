@@ -15,7 +15,7 @@ const Navbar = () => {
   return (
     <div className='navbar'>
       <Link to='/'>
-        <h1 className='logo'>Snippy</h1>
+        <h1 className='logo'>Snipy</h1>
       </Link>
       {token && (
         <div className='nav-links'>

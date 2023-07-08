@@ -15,9 +15,7 @@ const Links = ({ links }) => {
         links.map((link, index) => (
           <div key={index} className='card' onClick={() => onClick(link._id)}>
             <div className='date'>{link.date.slice(0,15)}</div>
-            <a href={link.longUrl} className='long-url' target='_blank' rel='noreferrer'>
-              {link.longUrl}
-            </a>
+            <div>{link.title}</div>
             <a href={link.shortUrl} className='short-url' target='_blank' rel='noreferrer'>
               {link.shortUrl}
             </a>

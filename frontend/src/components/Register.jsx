@@ -22,14 +22,14 @@ const Register = () => {
   };
 
   async function onSubmit(e) {
+    e.preventDefault();
+
     if (
       formFields.email !== '' &&
       formFields.password !== '' &&
       formFields.first_name !== '' &&
       formFields.last_name !== ''
     ) {
-      e.preventDefault();
-
       // Reset
       setToken(null);
       setAlert('');
@@ -59,6 +59,11 @@ const Register = () => {
         }, 3000);
         sessionStorage.removeItem('token');
       }
+    } else {
+      setAlert('Fill all form fields');
+      setTimeout(() => {
+        setAlert('');
+      }, 3000);
     }
   }
 

@@ -5,7 +5,7 @@ import { MyContext } from '../MyContext';
 const Edit = () => {
   let { id } = useParams();
   const navigate = useNavigate();
-  const { token, setCurrUrl, currUrl } = useContext(MyContext);
+  const { token, setCurrUrl, currUrl, setAlert } = useContext(MyContext);
 
   const [formFields, setFormFields] = useState({
     title: currUrl ? currUrl.title : '',
@@ -70,8 +70,13 @@ const Edit = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (formFields.backHalf !== '' && formFields.title !== '') {
+    if (formFields.backHalf !== '') {
       editUrl();
+    } else {
+      setAlert('Backhalf is required');
+      setTimeout(() => {
+        setAlert('');
+      }, 3000);
     }
   };
 

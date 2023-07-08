@@ -20,9 +20,9 @@ const Login = () => {
   };
 
   async function onSubmit(e) {
-    if (formFields.email !== '' && formFields.password !== '') {
-      e.preventDefault();
+    e.preventDefault();
 
+    if (formFields.email !== '' && formFields.password !== '') {
       // Reset
       setToken(null);
       setAlert('');
@@ -52,6 +52,11 @@ const Login = () => {
         }, 3000);
         sessionStorage.removeItem('token');
       }
+    } else {
+      setAlert('Fill all form fields');
+      setTimeout(() => {
+        setAlert('');
+      }, 3000);
     }
   }
 

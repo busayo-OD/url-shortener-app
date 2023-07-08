@@ -8,7 +8,7 @@ const Home = () => {
   const { token, links, setLinks, setCurrUrl, currUrl } = useContext(MyContext);
 
   useEffect(() => {
-    (!currUrl || !links.length) && getUrls();
+     getUrls();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -39,6 +39,7 @@ const Home = () => {
 
   return (
     <div className='home'>
+      <h2 className='page-title'>Links</h2>
       <Links links={links} />
       <Link links={links} currUrl={currUrl} />
     </div>

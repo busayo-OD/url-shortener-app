@@ -5,7 +5,7 @@ import { MyContext } from '../MyContext';
 const CreateLink = () => {
   const navigate = useNavigate();
 
-  const { token, links, setLinks, setCurrUrl } = useContext(MyContext);
+  const { token, links, setLinks, setCurrUrl, setAlert } = useContext(MyContext);
 
   const [formFields, setFormFields] = useState({
     longUrl: '',
@@ -44,12 +44,13 @@ const CreateLink = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    if (
-      formFields.backHalf !== '' &&
-      formFields.longUrl !== '' &&
-      formFields.title !== ''
-    ) {
+    if (formFields.longUrl !== '') {
       createUrl();
+    } else {
+      setAlert('Destination is required');
+      setTimeout(() => {
+        setAlert('');
+      }, 3000);
     }
   };
 
