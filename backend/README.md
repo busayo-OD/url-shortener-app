@@ -5,10 +5,10 @@
 - Open the project on vscode
 - In your vscode terminal cd into the backend folder, that is, cd backend
 - Add a new file named .env in the backend folder. Add the following environment variables:
-  PORT=
-  MONGODB_URI=
-  JWT_KEY=
-  BASE_URL=
+  - PORT=
+  - MONGODB_URI=
+  - JWT_KEY=
+  - BASE_URL=
 - Run npm install
 - Run npm run dev
 
