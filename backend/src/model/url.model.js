@@ -3,37 +3,21 @@ const Schema = mongoose.Schema;
 
 const urlSchema = new Schema({
     backHalf: String,
-    longUrl: {
-      type: String,
-      required: true,
-    },
+    longUrl: String,
     shortUrl: String,
     owner: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     },
     title: String,
     tags: [String],
+    clickSources: [String],
     qrCode: String,
-    clickCount: {
-      type: Number,
-      default: 0,
+    clicks:{
+        type: Number,
+        default: 0
     },
-    clicks: [
-      {
-        timestamp: {
-          type: Date,
-          default: Date.now,
-        },
-        ipAddress: String,
-        city: String,
-        country: String
-      },
-    ],
-    date: {
-      type: String,
-      default: Date.now,
-    },
-  });
+    date: {type: String, default: Date.now}
+});
 
 module.exports = mongoose.model('Url', urlSchema);
