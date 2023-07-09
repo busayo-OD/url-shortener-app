@@ -11,3 +11,15 @@ received and where the clicks are coming from.
 
 - Live preview: https://snipy.netlify.app/
 - Swagger API Documentation: https://snipy.onrender.com/api-docs/
+
+## Project Development Requirement
+- Programming Language: JavaScript
+- Runtime Environment: Node.js
+- Framework: React
+- Database: MongoDB
+- API Documentation: Postman and Swagger UI
+- IDE: VS Code
+- Project Development Requirement
+- Programming Language: Java
+
+
