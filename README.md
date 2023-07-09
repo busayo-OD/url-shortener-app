@@ -18,8 +18,4 @@ received and where the clicks are coming from.
 - Framework: React
 - Database: MongoDB
 - API Documentation: Postman and Swagger UI
-- IDE: VS Code
-- Project Development Requirement
-- Programming Language: Java
-
-
+- IDE: VSCode
