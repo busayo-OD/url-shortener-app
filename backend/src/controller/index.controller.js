@@ -29,8 +29,9 @@ const getLongUrl = async (req, res) => {
       // Get geolocation information based on IP address
       const response = await axios.get(`https://ipapi.co/${click.ipAddress}/json/`);
       if (response.status === 200) {
-        const { city } = response.data;
-        click.city = city;
+        const { City, Country } = response.data;
+        click.city = City;
+        click.country = Country
       }
 
       url.clicks.push(click);

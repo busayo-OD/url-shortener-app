@@ -26,6 +26,8 @@ const urlSchema = new Schema({
           default: Date.now,
         },
         ipAddress: String,
+        city: String,
+        country: String
       },
     ],
     date: {
