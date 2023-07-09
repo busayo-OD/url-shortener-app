@@ -233,6 +233,16 @@ button {
   img {
     width: 40%;
   }
+
+  a {
+    display: block;
+    background: #2a5bd7;
+    width: fit-content;
+    padding: 0.3rem 1.2rem;
+    border-radius: 4px;
+    color: #fff;
+    margin-top: 2rem;
+  }
 }
 
 .edit-btn {
@@ -260,6 +270,15 @@ button {
   img {
     width: fit-content;
     margin-left: -1.5rem;
+  }
+
+  a {
+    display: block;
+    background: #2a5bd7;
+    width: fit-content;
+    padding: 0.3rem 1.2rem;
+    border-radius: 4px;
+    color: #fff;
   }
 }
 
@@ -308,4 +327,8 @@ button {
       }
     }
   }
+}
+
+.generate {
+  color: #2a5bd7;
 }

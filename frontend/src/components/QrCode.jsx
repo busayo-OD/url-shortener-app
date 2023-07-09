@@ -65,7 +65,14 @@ const QrCode = () => {
   return (
     <div className='qr-code center'>
       <h2>QR Code</h2>
-      {qrCode && <img src={qrCode} alt='QR' />}
+      {qrCode && (
+        <>
+          <img src={qrCode} alt='QR' />
+          <a href={qrCode} download alt='QR'>
+            Download
+          </a>
+        </>
+      )}
     </div>
   );
 };

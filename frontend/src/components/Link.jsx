@@ -53,10 +53,13 @@ const Link = ({ currUrl }) => {
             <div className='link-qr'>
               <h2>QR Code</h2>
               <img src={currUrl.qrCode} alt='QR Code' />
+              <a href={currUrl.qrCode} download alt='QR'>
+                Download
+              </a>
             </div>
           )}
           {!currUrl.qrCode && (
-            <PageLink to={`/${currUrl._id}/create-qrcode`}>
+            <PageLink to={`/${currUrl._id}/create-qrcode`} className='generate'>
               Generate QR Code
             </PageLink>
           )}

@@ -5,7 +5,8 @@ import { MyContext } from '../MyContext';
 const CreateLink = () => {
   const navigate = useNavigate();
 
-  const { token, links, setLinks, setCurrUrl, setAlert } = useContext(MyContext);
+  const { token, links, setLinks, setCurrUrl, setAlert } =
+    useContext(MyContext);
 
   const [formFields, setFormFields] = useState({
     longUrl: '',
@@ -72,6 +73,7 @@ const CreateLink = () => {
           <input
             type='text'
             name='title'
+            placeholder='Optional'
             value={formFields.title}
             onChange={onChange}
           />
@@ -81,6 +83,7 @@ const CreateLink = () => {
           <input
             type='text'
             name='backHalf'
+            placeholder='Optional'
             value={formFields.backHalf}
             onChange={onChange}
           />
