@@ -1,6 +1,6 @@
 # url-shortener-app
 
-This app allows users to shorten URLs by pasting a long URL into the Scissor platform and a shorter URL gets automatically generated. The shortened URL is 
+This app allows users to shorten URLs by pasting a long URL into the platform and a shorter URL gets automatically generated. The shortened URL is 
 designed to be as short as possible, making it easy to share on social media or through other channels. The app allows users to see the history of links they’ve 
 created so they can easily find and reuse links they have previously created
 
@@ -9,5 +9,5 @@ Users can also generate QR codes for the shortened URLs. allow users to track th
 received and where the clicks are coming from. 
 
 
-Live preview: https://snipy.netlify.app/
-Swagger API Documentation: https://snipy.onrender.com/api-docs/
+- Live preview: https://snipy.netlify.app/
+- Swagger API Documentation: https://snipy.onrender.com/api-docs/
