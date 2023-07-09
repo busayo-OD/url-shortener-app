@@ -66,7 +66,7 @@ const Link = ({ currUrl }) => {
 
           {currUrl && (
             <div className='stats'>
-              <h2>Statistics</h2>
+              <h2>Analytics</h2>
 
               <div className='readings'>
                 <span className='label'>Clicks : </span>
