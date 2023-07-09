@@ -1,3 +1,5 @@
+const Url = require('../model/url.model');
+
 // redirect to long/original url
 const getLongUrl = async (req, res) => {
     try {
