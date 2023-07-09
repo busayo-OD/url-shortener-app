@@ -5,32 +5,43 @@ require('dotenv').config();
 
 
 const register = async (req, res, next) => {
-
-    const newUser = new User({
-        first_name: req.body.first_name,
-        last_name: req.body.last_name,
-        email: req.body.email,
-        password: await bcrypt.hash(req.body.password, 8),
-        
-    })
-
-    try{
-        const existingUser = await User.findOne({ email: req.body.email})
-        if(existingUser){
-            res.status(400).send({ error: "User already exist"})
-        }else {
-            await newUser.save();
-            const token = jwt.sign({
-                _id: newUser._id.toString()
-            },process.env.JWT_KEY, {expiresIn: '1d'})
-            res.status(201).send({token:token})
-        }
-    } 
-    catch(err){
-        next(err)
+    const { first_name, last_name, email, password } = req.body;
+  
+    if (password.length < 4) {
+      return res.status(400).send({ error: "Password must be at least 4 characters long" });
     }
-}
-
+  
+    try {
+      const existingUser = await User.findOne({ email });
+      if (existingUser) {
+        return res.status(400).send({ error: "User already exists" });
+      }
+  
+      const hashedPassword = await bcrypt.hash(password, 8);
+  
+      const newUser = new User({
+        first_name,
+        last_name,
+        email,
+        password: hashedPassword,
+      });
+  
+      await newUser.save();
+  
+      const token = jwt.sign(
+        {
+          _id: newUser._id.toString(),
+        },
+        process.env.JWT_KEY,
+        { expiresIn: "1d" }
+      );
+  
+      res.status(201).send({ token });
+    } catch (err) {
+      next(err);
+    }
+  };
+  
 const login = async(req, res, next) => {
     try {
         const user = await User.findOne({ email: req.body.email})
