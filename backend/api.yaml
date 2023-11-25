@@ -10,7 +10,7 @@ info:
     url: http://www.apache.org/liscences/LIS
 
 servers:
-  - url: https://snippy.onrender.com
+  - url: https://snipy.onrender.com
     description: Host Server
   - url: http://localhost:5000
     description: Local Server
